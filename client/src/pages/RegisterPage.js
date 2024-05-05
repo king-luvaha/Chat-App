@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import uploadFile from '../helpers/uploadFile';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const RegisterPage = () => {
   const [data,setData] = useState({
@@ -12,6 +14,7 @@ const RegisterPage = () => {
   })
 
   const [uploadPhoto,setUploadPhoto] = useState("")
+  const navigate = useNavigate()
 
   const handleOnChange = (e)=>{
     const { name, value } = e.target
@@ -30,6 +33,13 @@ const RegisterPage = () => {
     const uploadPhoto = await uploadFile(file)
 
     setUploadPhoto(file)
+
+    setData((preve)=>{
+      return{
+        ...preve,
+        profile_pic : uploadPhoto?.url
+      }
+    })
   }
 
   const handleClearUploadPhoto = (e)=>{
@@ -38,12 +48,35 @@ const RegisterPage = () => {
     setUploadPhoto(null)
   }
 
-  const handleSubmit = (e)=>{
+  const handleSubmit = async(e)=>{
     e.preventDefault()
     e.stopPropagation()
+
+    const URL = `${process.env.REACT_APP_BACKEND_URL}/api/register`
+
+    try {
+        const response = await axios.post(URL,data)
+        console.log("response",response)
+
+        toast.success(response.data.message)
+
+        if(response.data.success){
+          setData({
+            name : "",
+            email : "",
+            password : "",
+            profile_pic : ""
+          })
+
+          navigate("/email")
+        }
+    } catch (error) {
+        toast.error(error?.response?.data?.message)
+    }
+
+    console.log("data",data)
   }
 
-  console.log('uploadPhoto',uploadPhoto)
 
   return (
     <div className='mt-5'>
@@ -66,7 +99,7 @@ const RegisterPage = () => {
           </div>
 
           <div className='flex flex-col gap-1'>
-            <label htmlFor='name'>Email: </label>
+            <label htmlFor='email'>Email: </label>
             <input 
               type='email'
               id='email'
@@ -80,7 +113,7 @@ const RegisterPage = () => {
           </div>
 
           <div className='flex flex-col gap-1'>
-            <label htmlFor='name'>Password: </label>
+            <label htmlFor='password'>Password: </label>
             <input 
               type='password'
               id='password'

@@ -12,7 +12,7 @@ async function checkPassword(request,response){
 
         if(!verifyPassword){
             return response.status(400).json({
-                message : "Please Check Your Password",
+                message : "Password is Incorrect. Please Try Again.",
                 error : true
             })
         }
@@ -29,7 +29,7 @@ async function checkPassword(request,response){
         }
 
         return response.cookie("token",token,cookieOptions).status(200).json({
-            message : "Login Success!",
+            message : "Login Successful!",
             token : token,
             success : true
         })
