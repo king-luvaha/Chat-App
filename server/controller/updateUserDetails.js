@@ -5,7 +5,14 @@ async function updateUserDetails(request,response){
     try {
         const token = request.cookies.token || ""
 
+        // Ensure user exists before proceeding
         const user = await getUserDetailsFromToken(token)
+        if (!user || !user._id) {
+            return response.status(404).json({
+                message: "User not found or token invalid",
+                error: true
+            })
+        }
 
         const { name, profile_pic } = request.body
 
@@ -17,7 +24,7 @@ async function updateUserDetails(request,response){
         const userInformation = await UserModel.findById(user._id)
 
         return response.json({
-            message : "User Details Updated Succesfully",
+            message : "User details updated succesfully",
             data : userInformation,
             success : true
         })
