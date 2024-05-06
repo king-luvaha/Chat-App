@@ -6,7 +6,6 @@ import { BiLogOut } from "react-icons/bi";
 import Avatar from "./Avatar";
 import { useSelector } from 'react-redux';
 import EditUserDetails from './EditUserDetails';
-import Divider from './Divider';
 import { FiArrowUpLeft } from "react-icons/fi";
 import SearchUser from './SearchUser';
 
@@ -14,7 +13,7 @@ const SideBar = () => {
     const user = useSelector(state => state?.user);
     const [editUserOpen,setEditUserOpen] = useState(false);
     const [allUser,setAllUser] = useState([])
-    const [openSearchUser,setOpenSearchUser] = useState(true)
+    const [openSearchUser,setOpenSearchUser] = useState(false)
 
   return (
     <div className='w-full h-full grid grid-cols-[48px,1fr] bg-white'>
@@ -36,6 +35,7 @@ const SideBar = () => {
                     height={40} 
                     name={user.name} 
                     imageUrl={user?.profile_pic}
+                    userId={user?._id}
                     />
                 </button>
                 <button title='logout' className='w-12 h-12 flex justify-center items-center cursor-pointer hover:bg-slate-200 rounded'>

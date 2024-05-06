@@ -35,7 +35,7 @@ const router = createBrowserRouter([
             element : <Home />,
             children : [
                 {
-                    path : "userId",
+                    path : ":userId",
                     element : <MessagePage />
                 }
             ]
