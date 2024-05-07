@@ -7,12 +7,8 @@ async function updateUserDetails(request,response){
 
         // Ensure user exists before proceeding
         const user = await getUserDetailsFromToken(token)
-        if (!user || !user._id) {
-            return response.status(404).json({
-                message: "User not found or token invalid",
-                error: true
-            })
-        }
+
+        
 
         const { name, profile_pic } = request.body
 
@@ -30,10 +26,11 @@ async function updateUserDetails(request,response){
         })
 
     } catch (error) {
+        console.error("Error updating user details:", error);
         return response.status(500).json({
-            message : error.message || error,
-            error : true
-        })
+            message: error.message || "An unexpected error occurred",
+            error: true
+        });
     }
 }
 

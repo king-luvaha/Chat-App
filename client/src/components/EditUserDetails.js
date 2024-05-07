@@ -10,7 +10,7 @@ import { setUser } from '../redux/userSlice';
 const EditUserDetails = ({onClose,user}) => {
     const [data,setData] = useState({
 
-        name: user?.user,
+        name : user?.user,
         profile_pic : user?.profile_pic
     })
 
@@ -58,11 +58,14 @@ const EditUserDetails = ({onClose,user}) => {
     }
 
     const handleSubmit = async(e)=>{
-        e.preventDefault()
-        e.stopPropagation()
-        try {
-            const URL = `${process.env.REACT_APP_BACKEND_URL}/api/update-user`
+        e.preventDefault();
+        e.stopPropagation();
 
+        console.log("Data to be sent:", data); // Add this line to log the data
+
+        const URL = `${process.env.REACT_APP_BACKEND_URL}/api/update-user`
+
+        try {
             const response = await axios({
                 method : 'post',
                 url : URL,
@@ -70,17 +73,21 @@ const EditUserDetails = ({onClose,user}) => {
                 withCredentials : true
             })
 
-            console.log('response',response)
+            console.log('Response',response)
             toast.success(response?.data?.message)
 
             if(response.data.success){
                 dispatch(setUser(response.data.data))
                 onClose()
+            } else {
+                // Handle the case where the server responds but not with success
+                toast.error(response.data.message || 'Update failed without a specific error.');
             }
 
         } catch (error) {
-            console.log(error)
-            toast.error()
+            console.error('Error submitting form:', error);
+            // Display a more informative error message if possible
+            toast.error(error.response?.data?.message || 'An unexpected error occurred.');
         }
     }
 
