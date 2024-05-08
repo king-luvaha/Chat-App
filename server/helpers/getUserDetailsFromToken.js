@@ -6,7 +6,7 @@ const getUserDetailsFromToken = async(token)=> {
     if(!token){
         return {
             message : "Session Expired",
-            input : true,
+            logout : true,
         }
     }
 

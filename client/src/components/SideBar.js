@@ -64,11 +64,11 @@ const SideBar = () => {
     <div className='w-full h-full grid grid-cols-[48px,1fr] bg-white'>
         <div className='bg-slate-100 w-12 h-full rounded-tr-lg rounded-br-lg py-5 text-slate-600 flex flex-col justify-between'>
             <div>
-                <NavLink className={(isActive)=>`w-12 h-12 flex justify-center items-center cursor-pointer hover:bg-slate-200 rounded ${isActive && "bg-slate-200"}`} title='chat'>
+                <NavLink className={({isActive})=>`w-12 h-12 flex justify-center items-center cursor-pointer hover:bg-slate-200 ${isActive && "bg-slate-200"}`} title='Chat' style={{ marginTop: '-3px' }}>
                     <IoChatbubbleEllipses size={20}/>
                 </NavLink>
 
-                <div title='Add Friend' onClick={()=>setOpenSearchUser(true)} className='w-12 h-12 flex justify-center items-center cursor-pointer hover:bg-slate-200 rounded'>
+                <div title='Add Friend' onClick={()=>setOpenSearchUser(true)} className='mt-1 w-12 h-12 flex justify-center items-center cursor-pointer hover:bg-slate-200'>
                     <FaUserPlus size={20}/>
                 </div>
             </div>
@@ -78,13 +78,13 @@ const SideBar = () => {
                     <Avatar 
                     width={40} 
                     height={40} 
-                    name={user.name} 
+                    name={user?.name} 
                     imageUrl={user?.profile_pic}
                     userId={user?._id}
                     />
                 </button>
-                <button title='logout' className='w-12 h-12 flex justify-center items-center cursor-pointer hover:bg-slate-200 rounded' onClick={handleLogout}>
-                    <span className='-ml-2'>
+                <button title='Logout' className='w-12 h-12 flex justify-center items-center cursor-pointer hover:bg-slate-200 mt-2' onClick={handleLogout}>
+                    <span className='-ml-1'>
                         <BiLogOut size={20}/>
                     </span>
                 </button>

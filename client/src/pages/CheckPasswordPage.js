@@ -10,6 +10,7 @@ import { setToken } from '../redux/userSlice';
 const CheckPasswordPage = () => {
   const [data,setData] = useState({
     password : "",
+    userId : ""
   })
 
   const navigate = useNavigate()
@@ -77,7 +78,7 @@ const CheckPasswordPage = () => {
               height={70}
               name={location?.state?.name}
               imageUrl={location?.state?.profile_pic}
-            />
+            />            
         </div>
 
         <form className='grid gap-1 mt-3' onSubmit={handleSubmit}>
@@ -88,7 +89,7 @@ const CheckPasswordPage = () => {
               type='password'
               id='password'
               name='password'
-              placeholder='Enter Your Password'
+              placeholder='Password'
               className='bg-slate-100 px-2 py-1 focus:outline-primary'
               value={data.password}
               onChange={handleOnChange}
@@ -96,7 +97,7 @@ const CheckPasswordPage = () => {
             />
           </div>
 
-          <button className='bg-primary text-lg px-4 py-1 hover:bg-secondary rounded mt-3 font-bold text-white leading-relaxed tracking-wide'>
+          <button className='bg-primary text-lg px-4 py-1 hover:bg-secondary rounded mt-2 font-bold text-white leading-relaxed tracking-wide'>
             LOGIN
           </button>
         </form>

@@ -23,13 +23,24 @@ const SearchUser = ({onClose}) => {
             setSearchUser(response.data.data)
 
         } catch (error) {
-            toast.error(error?.response?.data?.message)
+            setLoading(false); // Reset loading state in case of error
+            if (error.response) {
+                // Server responded with an error status code
+                toast.error(error.response.data.message);
+            } else if (error.request) {
+                // The request was made but no response was received
+                toast.error('Network error. Please check your internet connection.');
+            } else {
+                // Something else happened in making the request
+                toast.error('An unexpected error occurred.');
+            }
         }
     }
 
+    // eslint-disable-next-line
     useEffect(()=>{
-        handleSearchUser()
-    },[search])
+        handleSearchUser();
+    },[search]);
 
     console.log("searchUser",searchUser)
 

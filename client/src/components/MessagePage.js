@@ -116,7 +116,7 @@ const MessagePage = () => {
 },[socketConnection,params?.userId,user])
 
   const handleOnChange = (e)=>{
-    const { name, value } = e.target
+    const { value } = e.target
 
     setMessage(preve => {
       return{
@@ -159,9 +159,9 @@ const MessagePage = () => {
             <Avatar 
               width={50}
               height={50}
-              imageUrl={dataUser.profile_pic}
+              imageUrl={dataUser?.profile_pic}
               name={dataUser?.name}
-              userId={dataUser._id}
+              userId={dataUser?._id}
             />
           </div>
 

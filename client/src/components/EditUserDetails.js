@@ -9,10 +9,14 @@ import { setUser } from '../redux/userSlice';
 
 const EditUserDetails = ({onClose,user}) => {
     const [data,setData] = useState({
-
         name : user?.user,
         profile_pic : user?.profile_pic
     })
+
+    const dataToSend = {
+      name: data.name,
+      profile_pic: data.profile_pic,
+    };
 
     const uploadPhotoRef = useRef()
     const dispatch = useDispatch()
@@ -69,7 +73,7 @@ const EditUserDetails = ({onClose,user}) => {
             const response = await axios({
                 method : 'post',
                 url : URL,
-                data : data,
+                data : dataToSend,
                 withCredentials : true
             })
 

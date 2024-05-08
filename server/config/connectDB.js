@@ -7,7 +7,7 @@ async function connectDB(){
         const connection = mongoose.connection
 
         connection.on('connected',()=>{
-            console.log("Connect to Database")
+            console.log("Connected to Database")
         })
 
         connection.on('error',(error)=>{
