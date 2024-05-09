@@ -6,11 +6,13 @@ const UserModel = require('../models/userModel')
 const { ConversationModel,MessageModel } = require('../models/ConversationModel')
 const getConversation = require('../helpers/getConversation')
 
-
+// Initialize Express app
 const app = express()
 
 // socket connection
 const server = http.createServer(app)
+
+// Initialize Socket.io server
 const io = new Server(server,{
     cors : {
         origin : process.env.FRONTEND_URL,
@@ -23,20 +25,23 @@ const io = new Server(server,{
 // online user
 const onlineUser = new Set()
 
+// Set up Socket.io event listeners
 io.on('connection',async(socket)=>{
     console.log("Connected User",socket.id)
 
     const token = socket.handshake.auth.token
 
-    //current user details
+    //Get current user details
     const user = await getUserDetailsFromToken(token)
 
-    // create a room
+    // Add user to online users
     socket.join(user?._id?.toString())
     onlineUser.add(user?._id?.toString())
 
+    // Emit online users to all clients
     io.emit('onlineUser',Array.from(onlineUser))
     
+    // Handle events for messaging page
     socket.on('message-page',async(userId)=>{
         console.log('userId',userId)
         const userDetails = await UserModel.findById(userId).select("-password")
@@ -51,7 +56,7 @@ io.on('connection',async(socket)=>{
         }
         socket.emit('message-user',payload)
 
-        //get previous message
+        // Get previous message
         const getConversationMessage = await ConversationModel.findOne({
             "$or" : [
                 { sender : user?._id, receiver : userId },
@@ -62,7 +67,7 @@ io.on('connection',async(socket)=>{
         socket.emit('message',getConversationMessage?.messages || [])
     })
 
-    //new message
+    // Handle new messages
     socket.on('New Message',async(data)=>{
 
         //check connection is available with user
@@ -116,7 +121,7 @@ io.on('connection',async(socket)=>{
         console.log("getConversation",getConversation) 
     })
 
-    //sidebar
+    // Handle sidebar event
     socket.on('sidebar',async(currentUserId)=>{
         console.log("current user",currentUserId)
 
@@ -126,6 +131,7 @@ io.on('connection',async(socket)=>{
         
     })
 
+    // Handle seen event
     socket.on('seen',async(msgByUserId)=>{
         
         let conversation = await ConversationModel.findOne({
@@ -150,7 +156,7 @@ io.on('connection',async(socket)=>{
         io.to(msgByUserId).emit('conversation',conversationReceiver)
     })
 
-    //disconnect
+    // Handle disconnection
     socket.on('disconnect',()=>{
         onlineUser.delete(user?._id?.toString())
         console.log("Disconnected User",socket.id)

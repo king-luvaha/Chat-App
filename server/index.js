@@ -8,23 +8,27 @@ const { app, server } = require('./socket/index')
 
 const PORT = process.env.PORT || 8080
 
-// const app = express();
 
+// Set up CORS middleware
 app.use(cors({
     origin: process.env.FRONTEND_URL,
     credentials: true
 }));
 
-app.use(express.json())
-app.use(cookiesParser())
+// Parse JSON bodies
+app.use(express.json());
 
+// Parse cookies
+app.use(cookiesParser());
+
+// Define a route for the root URL
 app.get('/',(request, response)=>{
     response.json({
         message : "Server running at PORT " + PORT
     })
 })
 
-//api endpoints
+// Define API endpoints
 app.use('/api',router)
 
 connectDB().then(()=>{
