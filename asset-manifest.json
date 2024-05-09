@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/chat-app/static/css/main.7841a3b4.css",
+    "main.js": "/chat-app/static/js/main.d5e93691.js",
+    "static/js/453.419a5d54.chunk.js": "/chat-app/static/js/453.419a5d54.chunk.js",
+    "static/media/Gumzo-logo.png": "/chat-app/static/media/Gumzo-logo.1ca7a5b5d28d91ba0fe7.png",
+    "static/media/wallapaper.jpeg": "/chat-app/static/media/wallapaper.7bdbf3e9aba4f2af5ac6.jpeg",
+    "index.html": "/chat-app/index.html",
+    "main.7841a3b4.css.map": "/chat-app/static/css/main.7841a3b4.css.map",
+    "main.d5e93691.js.map": "/chat-app/static/js/main.d5e93691.js.map",
+    "453.419a5d54.chunk.js.map": "/chat-app/static/js/453.419a5d54.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7841a3b4.css",
+    "static/js/main.d5e93691.js"
+  ]
+}
