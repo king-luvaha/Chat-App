@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { PiUserCircle } from "react-icons/pi";
+import { HiOutlineUserGroup } from "react-icons/hi2";
 
 const CheckEmailPage = () => {
   const [data,setData] = useState({
@@ -50,8 +50,8 @@ const CheckEmailPage = () => {
     <div className='mt-5'>
       <div className='bg-white w-full max-w-md rounded overflow-hidden p-4 mx-auto'>
 
-        <div className='w-fit mx-auto mb-2'>
-            <PiUserCircle size={80}/>
+        <div className='w-fit mx-auto mb-8'>
+            <HiOutlineUserGroup size={100}/>
         </div>
 
         <form className='grid gap-1 mt-3' onSubmit={handleSubmit}>

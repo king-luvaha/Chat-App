@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { logout, setOnlineUser, setSocketConnection, setUser } from '../redux/userSlice'
 import SideBar from '../components/SideBar'
-import logo from '../assets/logo.png'
+import logo from '../assets/Gumzo-logo.png'
 import io from 'socket.io-client'
 
 const Home = () => {

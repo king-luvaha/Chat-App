@@ -71,17 +71,20 @@ const CheckPasswordPage = () => {
     <div className='mt-5'>
       <div className='bg-white w-full max-w-md rounded overflow-hidden p-4 mx-auto'>
 
-        <div className='w-fit mx-auto mb-12 flex justify-center items-center flex-col'>
+        <div className='w-fit mx-auto mb-8 flex justify-center items-center flex-col'>
             {/* <PiUserCircle size={80}/> */}
             <Avatar 
-              width={70}
-              height={70}
+              width={100}
+              height={100}
               name={location?.state?.name}
               imageUrl={location?.state?.profile_pic}
-            />            
+            />
+            <h2 className='font-semibold text-lg mt-3'>{location?.state?.name}</h2>            
         </div>
 
-        <form className='grid gap-1 mt-3' onSubmit={handleSubmit}>
+        <hr class="my-8 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-neutral-500 to-transparent opacity-25 dark:via-neutral-400" />
+
+        <form className='grid gap-1 mt-2' onSubmit={handleSubmit}>
           
           <div className='flex flex-col gap-1'>
             
