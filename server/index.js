@@ -11,8 +11,8 @@ const PORT = process.env.PORT || 8080
 
 // Set up CORS middleware
 app.use(cors({
-    origin: process.env.FRONTEND_URL,
-    credentials: true
+    origin: "http://localhost:3000",
+    credentials : true
 }));
 
 // Parse JSON bodies

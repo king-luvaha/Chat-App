@@ -38,7 +38,7 @@ const CheckPasswordPage = () => {
     e.preventDefault()
     e.stopPropagation()
 
-    const URL = `${process.env.REACT_APP_BACKEND_URL}/api/password`
+    const URL = `${"https://chatapp-api.onrender.com"}/api/password`
 
     try {
         const response = await axios({
@@ -63,9 +63,13 @@ const CheckPasswordPage = () => {
           navigate('/')
         }
     } catch (error) {
-        toast.error(error?.response?.data?.message)
+        if (error.response) {
+          toast.error(error?.response?.data?.message)
+        } else {
+          toast.error("An unexpected error occurred.");
+        }
     }
-  }
+  };
 
   return (
     <div className='mt-5'>

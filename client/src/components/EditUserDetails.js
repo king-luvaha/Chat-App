@@ -67,7 +67,7 @@ const EditUserDetails = ({onClose,user}) => {
 
         console.log("Data to be sent:", data); // Add this line to log the data
 
-        const URL = `${process.env.REACT_APP_BACKEND_URL}/api/update-user`
+        const URL = `${"https://chatapp-api.onrender.com"}/api/update-user`
 
         try {
             const response = await axios({

@@ -52,12 +52,10 @@ const RegisterPage = () => {
     e.preventDefault()
     e.stopPropagation()
 
-    const URL = `${process.env.REACT_APP_BACKEND_URL}/api/register`
+    const URL = `${"http://localhost:8080"}/api/register`
 
     try {
         const response = await axios.post(URL,data)
-        console.log("response",response)
-
         toast.success(response.data.message)
 
         if(response.data.success){
@@ -71,11 +69,17 @@ const RegisterPage = () => {
           navigate("/email")
         }
     } catch (error) {
-        toast.error(error?.response?.data?.message)
+      let errorMessage = "Failed to Register. Please try again";
+      if (error.response) {
+        // Handling errors returned from the backend
+        errorMessage = error.response.data.message || errorMessage;
+      } else if (error.request) {
+        // Handling network or other technical issues
+        errorMessage = "Network error. Please check your connection.";
+      }
+        toast.error(errorMessage);
     }
-
-    console.log("data",data)
-  }
+  };
 
 
   return (
