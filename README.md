@@ -6,7 +6,7 @@
 - App contains registration & Login functionality.
 - Images & Video sending functionality is available.
 
-Technology used:
+## Technology used:
 
 - React - front-end JavaScript library for building user interfaces based on components.
 - Node.js and npm
