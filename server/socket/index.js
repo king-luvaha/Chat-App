@@ -15,7 +15,7 @@ const server = http.createServer(app)
 // Initialize Socket.io server
 const io = new Server(server,{
     cors : {
-        origin : "http://localhost:3000",
+        origin : process.env.REACT_APP_FRONTEND_URL,
         credentials : true
     }
 })
@@ -60,7 +60,7 @@ io.on('connection',async(socket)=>{
         const getConversationMessage = await ConversationModel.findOne({
             "$or" : [
                 { sender : user?._id, receiver : userId },
-                { sender : userId, receiver :  user?._id}
+                { sender : userId, receiver : user?._id}
             ]
         }).populate('messages').sort({ updatedAt : -1 })
 

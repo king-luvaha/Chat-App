@@ -11,8 +11,8 @@ const PORT = process.env.PORT || 8080
 
 // Set up CORS middleware
 app.use(cors({
-    origin: "http://localhost:3000",
-    credentials : true
+    origin: process.env.REACT_APP_FRONTEND_URL,
+    credentials: true
 }));
 
 // Parse JSON bodies

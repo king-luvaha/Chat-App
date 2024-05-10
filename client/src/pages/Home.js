@@ -43,7 +43,7 @@ const Home = () => {
 
   // socket connection
   useEffect(()=>{
-    const socketConnection = io("https://chatapp-api.onrender.com",{
+    const socketConnection = io(process.env.REACT_APP_BACKEND_URL,{
       auth : {
         token : localStorage.getItem('token')
       },

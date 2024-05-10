@@ -38,7 +38,7 @@ const CheckPasswordPage = () => {
     e.preventDefault()
     e.stopPropagation()
 
-    const URL = `${"https://chatapp-api.onrender.com"}/api/password`
+    const URL = `${process.env.REACT_APP_BACKEND_URL}/api/password`
 
     try {
         const response = await axios({

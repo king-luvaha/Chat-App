@@ -12,7 +12,7 @@ const SearchUser = ({onClose}) => {
     const [search,setSearch] = useState("")
 
     const handleSearchUser = async()=>{
-        const URL = `${"https://chatapp-api.onrender.com"}/api/search-user`
+        const URL = `${process.env.REACT_APP_BACKEND_URL}/api/search-user`
         try {
             setLoading(true)
             const response = await axios.post(URL,{
@@ -42,8 +42,6 @@ const SearchUser = ({onClose}) => {
         handleSearchUser();
     },[search]);
 
-    console.log("searchUser",searchUser)
-
   return (
     <div className='fixed top-0 bottom-0 left-0 right-0 bg-slate-700 bg-opacity-40 p-2 z-10'>
         <div className='w-full max-w-lg mx-auto mt-10 '>
@@ -63,7 +61,7 @@ const SearchUser = ({onClose}) => {
             </div>
 
             {/* Display Search User */}
-            <div className='bg-white mt-2 w-full p-4 rounded'>
+            <div className='bg-white mt-2 w-full p-4 rounded overflow-y-scroll scrollbar' style={{ maxHeight: "calc(100vh - 200px)" }}>
                 {/* No User Found */}
                 {
                     searchUser.length === 0 &&  !loading && (
