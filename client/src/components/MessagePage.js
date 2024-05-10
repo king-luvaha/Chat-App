@@ -11,8 +11,10 @@ import uploadFile from '../helpers/uploadFile';
 import { IoClose } from "react-icons/io5";
 import Loading from './Loading';
 import backgroundImage from '../assets/wallapaper.jpeg';
+import InputEmoji from 'react-input-emoji'
 import { IoSend } from "react-icons/io5";
 import moment from 'moment'
+
 
 const MessagePage = () => {
   const params = useParams()
@@ -35,6 +37,8 @@ const MessagePage = () => {
   const [loading,setLoading] = useState(false)
   const [allMessage,setAllMessage] = useState([])
   const currentMessage = useRef(null)
+
+  
 
   useEffect(()=>{
     if(currentMessage.current){
@@ -115,16 +119,12 @@ const MessagePage = () => {
     }
 },[socketConnection,params?.userId,user])
 
-  const handleOnChange = (e)=>{
-    const { value } = e.target
-
-    setMessage(preve => {
-      return{
-        ...preve,
-        text : value
-      }
-    })
-  }
+  const handleOnChange = (text)=>{
+    setMessage(prevState => ({
+      ...prevState,
+      text
+    }));
+  };
 
   const handleSendMessage = (e)=>{
     e.preventDefault()
@@ -143,10 +143,13 @@ const MessagePage = () => {
           text : "",
           imageUrl : "",
           videoUrl : ""
-        })
+        }) // Clear the input after sending
       }
     }
   }
+
+  
+  
 
   return (
     <div style={{ backgroundImage : `url(${backgroundImage})`}} className='bg-no-repeat bg-cover'>
@@ -190,7 +193,7 @@ const MessagePage = () => {
                 {
                   allMessage.map((msg,index)=>{
                     return(
-                      <div className={` p-1 py-1 rounded w-fit max-w-[280px] md:max-w-sm lg:max-w-md ${user._id === msg?.msgByUserId ? "ml-auto bg-teal-100" : "bg-white"}`}>
+                      <div className={` p-1 py-1 rounded w-fit max-w-[280px] md:max-w-sm lg:max-w-md ${user._id === msg?.msgByUserId ? "ml-auto bg-orange-200" : "bg-white"}`}>
                         <div className='w-full relative'>
                           {
                             msg?.imageUrl && (
@@ -287,7 +290,7 @@ const MessagePage = () => {
                   </label>
 
                   <label htmlFor='uploadVideo' className='flex items-center p-2 gap-3 hover:bg-slate-200 cursor-pointer'>
-                    <div className='text-purple-500'>
+                    <div className='text-blue-500'>
                       <FaVideo size={18} />
                     </div>
                     <p>Video</p>
@@ -310,22 +313,23 @@ const MessagePage = () => {
               </div>
             )
           }
-
         </div>
 
         {/* Input Box */}
-        <form className='h-full w-full flex gap-2' onSubmit={handleSendMessage}>
-          
-            <input
-              type='text'
-              placeholder='Message'
-              className='py-1 px-4 outline-none w-full h-full'
-              value={message.text}
-              onChange={handleOnChange}
-            />
-            <button className='hover:text-primary'>
-              <IoSend size={25}/>
-            </button>
+        <form className='h-full w-full flex items-center gap-2' onSubmit={handleSendMessage}>
+              <InputEmoji
+                value={message.text}
+                onChange={handleOnChange}
+                placeholder="Message"
+                emojiSet="twitter"
+                autoFocus
+              />
+              <button 
+                onClick={handleSendMessage}
+                className='hover:text-primary'
+              >
+                <IoSend size={25}/>
+              </button>
         </form>
       </section>
     </div>

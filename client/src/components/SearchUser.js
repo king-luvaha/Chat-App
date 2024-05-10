@@ -40,6 +40,7 @@ const SearchUser = ({onClose}) => {
     // eslint-disable-next-line
     useEffect(()=>{
         handleSearchUser();
+        // eslint-disable-next-line
     },[search]);
 
   return (

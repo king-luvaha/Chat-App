@@ -39,6 +39,7 @@ const Home = () => {
 
   useEffect(()=>{
     fetchUserDetails()
+    // eslint-disable-next-line
   },[])
 
   // socket connection
@@ -59,6 +60,7 @@ const Home = () => {
     return ()=>{
       socketConnection.disconnect()
     }
+    // eslint-disable-next-line
   },[])
 
   const basePath = location.pathname === '/'
