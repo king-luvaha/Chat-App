@@ -11,7 +11,6 @@ import uploadFile from '../helpers/uploadFile';
 import { IoClose } from "react-icons/io5";
 import Loading from './Loading';
 import backgroundImage from '../assets/wallapaper.jpeg';
-import InputEmoji from 'react-input-emoji'
 import { IoSend } from "react-icons/io5";
 import moment from 'moment'
 
@@ -119,11 +118,15 @@ const MessagePage = () => {
     }
 },[socketConnection,params?.userId,user])
 
-  const handleOnChange = (text)=>{
-    setMessage(prevState => ({
-      ...prevState,
-      text
-    }));
+  const handleOnChange = (e)=>{
+    const { value} = e.target
+
+    setMessage(preve => {
+      return{
+        ...preve,
+        text : value
+      }
+    })
   };
 
   const handleSendMessage = (e)=>{
@@ -317,19 +320,16 @@ const MessagePage = () => {
 
         {/* Input Box */}
         <form className='h-full w-full flex items-center gap-2' onSubmit={handleSendMessage}>
-              <InputEmoji
-                value={message.text}
-                onChange={handleOnChange}
-                placeholder="Message"
-                emojiSet="twitter"
-                autoFocus
-              />
-              <button 
-                onClick={handleSendMessage}
-                className='hover:text-primary'
-              >
-                <IoSend size={25}/>
-              </button>
+          <input
+            type='text'
+            placeholder='Type here message...'
+            className='py-1 px-4 outline-none w-full h-full'
+            value={message.text}
+            onChange={handleOnChange}
+          />
+          <button className='text-primary hover:text-secondary'>
+            <IoSend size={25}/>
+          </button>
         </form>
       </section>
     </div>
