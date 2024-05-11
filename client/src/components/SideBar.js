@@ -11,6 +11,7 @@ import SearchUser from './SearchUser';
 import { FaRegImage } from "react-icons/fa6";
 import { FaVideo } from "react-icons/fa";
 import { logout } from '../redux/userSlice';
+import logo from '../assets/Gumzo-logo.png'
 
 const SideBar = () => {
     const user = useSelector(state => state?.user);
@@ -93,7 +94,12 @@ const SideBar = () => {
 
         <div className='w-full'>
             <div className='h-16 flex items-center'>
-                <h2 className='text-xl font-bold p-4 text-slate-800'>Message
+                <h2 className='text-xl font-bold p-4 text-orange-500'>
+                    <img 
+                    src={logo}
+                    width={150}
+                    alt='logo'
+                    />
                 </h2>
             </div>
             <div className='bg-slate-200 p-[0.5px]'></div>
