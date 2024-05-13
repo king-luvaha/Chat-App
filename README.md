@@ -16,8 +16,8 @@
 - Socket.io - event-driven library for real-time web applications.
   
 ![Preview 1](./Preview1.png)
-![Preview2](,/Preview2.png)
-![Preview3](,/Preview3.png)
-![Preview4](,/Preview4.png)
-![Preview5](,/Preview5.png)
-![Preview6](,/Preview6.png)
+![Preview 2](./Preview2.png)
+![Preview 3](./Preview3.png)
+![Preview 4](./Preview4.png)
+![Preview 5](./Preview5.png)
+![Preview 6](./Preview6.png)
