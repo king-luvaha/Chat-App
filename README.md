@@ -15,7 +15,7 @@
 - MongoDB - Database
 - Socket.io - event-driven library for real-time web applications.
   
-![Preview1](,/Preview1.png)
+![Preview 1](./Preview1.png)
 ![Preview2](,/Preview2.png)
 ![Preview3](,/Preview3.png)
 ![Preview4](,/Preview4.png)
